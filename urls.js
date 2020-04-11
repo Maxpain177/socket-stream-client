@@ -10,10 +10,21 @@ function translateUrl(url, newSchemeBase, subPath) {
     newSchemeBase = 'http';
   }
 
-  console.log({ subPath, url });
+  if (subPath === 'websocket') {
+    var protocol
+    var loc = window.location
 
-  if (subPath !== "sockjs" && url.startsWith("/") && subPath !== 'websocket') {
-    url = Meteor.absoluteUrl(url.substr(1));
+    if (loc.protocol === 'https:') {
+      protocol = 'wss'
+    } else {
+      protocol = 'ws'
+    }
+
+    url = protocol + '://' + loc.host + '/' + subPath
+  } else {
+    if (subPath !== "sockjs" && url.startsWith("/")) {
+      url = Meteor.absoluteUrl(url.substr(1));
+    }
   }
 
   var ddpUrlMatch = url.match(/^ddp(i?)\+sockjs:\/\//);
