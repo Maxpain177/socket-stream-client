@@ -20,7 +20,7 @@ function translateUrl(url, newSchemeBase, subPath) {
       protocol = 'ws'
     }
 
-    url = protocol + '://' + loc.host + '/' + subPath
+    url = protocol + '://' + loc.host + '/'
   } else {
     if (subPath !== "sockjs" && url.startsWith("/")) {
       url = Meteor.absoluteUrl(url.substr(1));
