@@ -10,7 +10,7 @@ function translateUrl(url, newSchemeBase, subPath) {
     newSchemeBase = 'http';
   }
 
-  if (subPath === 'websocket') {
+  if (subPath === 'websocket' && window) {
     var protocol
     var loc = window.location
 
